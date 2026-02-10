@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>敬鲟的数字空间 - 白色主题，无彩色字体，前沿建筑艺术</title>
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+
+    <!-- Tailwind CSS CDN - Preloaded for faster rendering -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="style">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for a dmego/home.github.io-like aesthetic with animations - LIGHT THEME, NO COLOR FONTS */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f8f8; /* Very light gray/off-white background */
+            color: #333333; /* Dark gray text for contrast */
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        .header-bg {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent light header */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e0e0e0; /* Subtle light border */
+        }
+        /* No gradient-text class anymore */
+        .card-bg {
+            background-color: #ffffff; /* White card background */
+            border: 1px solid #e0e0e0; /* Light gray border */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Lighter shadow for depth */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .card-bg:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+            border-color: #cccccc; /* Subtle highlight on border, neutral gray */
+        }
+        h1 {
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: #1a1a1a;
+            font-size: 3rem; /* text-5xl (48px) */
+        }
+        h2 {
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: #1a1a1a;
+            font-size: 2.25rem; /* text-4xl (36px) */
+        }
+        h3 {
+            font-weight: 700; /* Ensure h3 is bold as well */
+            letter-spacing: -0.03em;
+            color: #1a1a1a;
+        }
+
+        /* Carousel specific styles - now full width */
+        #carousel-section {
+            position: relative;
+            width: 100vw; /* Full viewport width */
+            margin-left: calc(50% - 50vw); /* Center the element by offsetting it */
+            overflow: hidden;
+            aspect-ratio: 16/7; /* Slightly wider aspect ratio for a more cinematic feel */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .carousel-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+        }
+        .carousel-slide.active {
+            display: block;
+            opacity: 1;
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.05); /* Very subtle background */
+            color: #333333; /* Dark icon color */
+            border: none;
+            padding: 0.75rem 1.25rem;
+            cursor: pointer;
+            font-size: 1.8rem;
+            transition: background-color 0.3s ease, opacity 0.3s ease, color 0.3s ease;
+            border-radius: 0.5rem;
+            line-height: 1;
+            opacity: 0;
+            z-index: 20; /* Ensure carousel buttons are above image edit button and counter */
+        }
+        #carousel-section:hover .carousel-button {
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        .carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+        .carousel-button-prev {
+            left: 2rem; /* Adjusted for full width */
+        }
+        .carousel-button-next {
+            right: 2rem; /* Adjusted for full width */
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background-color: #1a1a1a; /* Solid dark button */
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: #333333; /* Slightly lighter dark on hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        .btn-secondary {
+            background-color: #e0e0e0; /* Light gray secondary button */
+            border: 1px solid #cccccc;
+            color: #333333;
+            padding: 0.8rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #cccccc;
+            border-color: #aaaaaa;
+            color: #1a1a1a;
+        }
+        a.text-link-color, .text-link-color { /* New class for specific links, now also for strong tags */
+            color: #333333; /* Dark gray for links */
+            text-decoration: underline; /* Add underline for better indication */
+            transition: color 0.3s ease;
+        }
+        a.text-link-color:hover, .text-link-color:hover {
+            color: #1a1a1a; /* Darker gray on hover */
+            text-decoration: none;
+        }
+        .text-gray-normal {
+             color: #333333; /* Darker for light theme */
+        }
+        .text-gray-medium {
+             color: #666666; /* Medium gray for light theme */
+        }
+
+        /* --- Fade-in-on-scroll Animation Styles --- */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Slower, smoother transition */
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Edit Mode Specific Styles --- */
+        [contenteditable="true"] {
+            outline: 2px dashed #999999; /* Visual cue for editable content - neutral gray */
+            padding: 2px;
+            cursor: text;
+        }
+        .image-edit-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.6); /* Lighter overlay for light theme */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 5;
+        }
+        .image-edit-overlay:hover {
+            opacity: 1;
+        }
+        .image-edit-overlay button {
+            background-color: #333333; /* Use dark gray for button */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            z-index: 10; /* Ensure it's above the image, but still below carousel controls if active */
+        }
+        .image-wrapper {
+            position: relative;
+            display: inline-block; /* Essential for overlay positioning */
+            width: 100%; /* Make image wrapper fill its container */
+            height: 100%; /* Make image wrapper fill its container */
+        }
+        .hidden {
+            display: none !important;
+        }
+        /* Additional styling for the knowledge modal */
+        #knowledge-modal, #paywall-modal {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Paywall lock icon for knowledge cards */
+        .knowledge-card.locked .paywall-lock-icon {
+            display: block;
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            z-index: 6; /* Above image edit overlay but below buttons */
+        }
+        .paywall-lock-icon {
+            display: none;
+        }
+
+        /* Paywall and Knowledge Modal content styling for light theme */
+        #knowledge-modal > div, #paywall-modal > div {
+            background-color: #ffffff; /* White background */
+            border: 1px solid #e0e0e0;
+        }
+        #knowledge-modal #modal-title {
+            color: #1a1a1a; /* Darker title in modal */
+        }
+        #knowledge-modal #modal-content {
+            color: #333333; /* Dark text for modal content */
+        }
+        #paywall-modal h3 {
+             color: #1a1a1a; /* Darker heading in paywall modal */
+        }
+        #paywall-modal p {
+            color: #666666; /* Darker text in paywall modal */
+        }
+        #unlock-code-input {
+            background-color: #f0f0f0; /* Light input background */
+            border: 1px solid #cccccc;
+            color: #333333;
+        }
+        #unlock-code-input:focus {
+            border-color: #999999; /* Focus border in neutral gray */
+        }
+        #unlock-message {
+            color: #dc2626; /* Red error message */
+        }
+        #paywall-modal .text-gray-500 {
+            color: #999999; /* Lighter hint text */
+        }
+        #paywall-modal .text-gray-800 {
+            color: #333333; /* Darker strong hint text */
+        }
+
+        /* Edit mode toggle button for light theme */
+        #edit-mode-toggle {
+            background-color: #e0e0e0; /* Light gray background */
+            color: #666666; /* Dark gray text */
+            opacity: 0.6; /* Slightly less opaque */
+        }
+        #edit-mode-toggle:hover {
+            background-color: #cccccc; /* Darker gray on hover */
+            color: #333333; /* Darker text on hover */
+            opacity: 1;
+        }
+
+        /* Edit mode controls (save/cancel) for light theme */
+        #edit-mode-controls button.btn-primary {
+            background-color: #333333; /* Use dark gray for save */
+            background-image: none; /* Remove gradient for a solid look */
+            color: white;
+        }
+        #edit-mode-controls button.btn-secondary {
+            background-color: #cccccc; /* Use light gray for cancel */
+            border-color: #aaaaaa;
+            color: #333333;
+        }
+        /* Custom styles for contact icons for visual appeal */
+        .contact-icon {
+            font-size: 1.5rem; /* Slightly smaller for better fit with symbols */
+            width: 2rem; /* Fixed width for alignment */
+            text-align: center;
+            color: #4a4a4a; /* A bit darker gray for the symbols */
+        }
+
+        /* Custom styles for contact ink wash effect */
+        .contact-ink-style {
+            background: linear-gradient(145deg, #ffffff 0%, #f9f9f9 50%, #f0f0f0 100%); /* Subtle light gray gradient */
+            border: 1px solid #d0d0d0; /* Slightly darker, softer border */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Softer shadow */
+        }
+        .contact-ink-style:hover {
+            transform: translateY(-3px); /* Slightly less dramatic lift */
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15); /* Slightly enhanced shadow on hover */
+            border-color: #bbbbbb;
+        }
+
+        /* Added for 2x2 grid responsiveness */
+        .contact-grid-container {
+            display: grid;
+            grid-template-columns: 1fr; /* Default to 1 column on small screens */
+            gap: 2.5rem 3rem; /* Increased gap-y and gap-x for spacing */
+        }
+        @media (min-width: 768px) { /* Medium screens and up */
+            .contact-grid-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for md and larger */
+                gap: 2.5rem 3rem; /* Same increased gap */
+            }
+        }
+        .contact-grid-item {
+             display: flex;
+             align-items: center;
+             justify-content: center; /* Center horizontally on small screens */
+        }
+        @media (min-width: 768px) {
+            .contact-grid-item {
+                justify-content: flex-start; /* Align to start in grid cell on md and larger */
+            }
+        }
+
+        /* Anchor scroll offset for sticky header */
+        section[id], #resume {
+            scroll-margin-top: 5rem; /* Adjust this value based on your header's height */
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header-bg shadow-lg">
+        <nav class="container mx-auto px-8 py-4 flex justify-between items-center max-w-7xl">
+            <a href="#" class="text-3xl font-bold text-gray-900" id="site-title" contenteditable="false">敬鲟</a>
+            <div class="space-x-8 text-lg">
+                <a href="#about" class="text-gray-medium hover:text-gray-normal transition duration-300" contenteditable="false">关于我</a>
+                <a href="#knowledge" class="text-gray-medium hover:text-gray-normal transition duration-300" contenteditable="false">知识文库</a>
+                <a href="#portfolio" class="text-gray-medium hover:text-gray-normal transition duration-300" contenteditable="false">作品集</a>
+                <a href="#contact" class="text-gray-medium hover:text-gray-normal transition duration-300" contenteditable="false">联系我</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Full-Width Image Carousel Section -->
+    <section id="carousel-section" class="mb-16"> <!-- mb-16 adds space below carousel -->
+        <div class="carousel-container">
+            <!-- Added loading="lazy" for non-active slides, and width/height for all -->
+            <div class="image-wrapper carousel-slide active">
+                <img src="https://images.unsplash.com/photo-1548328103-61474a22b79e?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&h=810&fit=crop" alt="现代建筑外观" class="w-full h-full object-cover editable-image" width="1920" height="810">
+                <div class="image-edit-overlay hidden">
+                    <button onclick="editImage(this)">修改图片</button>
+                </div>
+            </div>
+            <div class="image-wrapper carousel-slide">
+                <img src="https://images.unsplash.com/photo-1628174416187-0b190f845d07?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&h=810&fit=crop" alt="曲线型未来建筑" class="w-full h-full object-cover editable-image" loading="lazy" width="1920" height="810">
+                <div class="image-edit-overlay hidden">
+                    <button onclick="editImage(this)">修改图片</button>
+                </div>
+            </div>
+            <div class="image-wrapper carousel-slide">
+                <img src="https://images.unsplash.com/photo-1502472911043-4f27f08c31e6?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&h=810&fit=crop" alt="几何结构建筑" class="w-full h-full object-cover editable-image" loading="lazy" width="1920" height="810">
+                <div class="image-edit-overlay hidden">
+                    <button onclick="editImage(this)">修改图片</button>
+                </div>
+            </div>
+            <div class="image-wrapper carousel-slide">
+                <img src="https://images.unsplash.com/photo-1500382017409-5a8286a1005b?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&h=810&fit=crop" alt="独特纹理建筑" class="w-full h-full object-cover editable-image" loading="lazy" width="1920" height="810">
+                <div class="image-edit-overlay hidden">
+                    <button onclick="editImage(this)">修改图片</button>
+                </div>
+            </div>
+            <div class="image-wrapper carousel-slide">
+                <img src="https://images.unsplash.com/photo-1519782544208-410a56e6e22e?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&h=810&fit=crop" alt="解构主义建筑" class="w-full h-full object-cover editable-image" loading="lazy" width="1920" height="810">
+                <div class="image-edit-overlay hidden">
+                    <button onclick="editImage(this)">修改图片</button>
+                </div>
+            </div>
+            <button class="carousel-button carousel-button-prev" onclick="plusSlides(-1)">&#10094;</button>
+            <button class="carousel-button carousel-button-next" onclick="plusSlides(1)">&#10095;</button>
+            <div id="slide-number" class="absolute bottom-8 left-1/2 -translate-x-1/2 bg-gray-900 bg-opacity-60 text-white px-4 py-2 rounded-full text-base z-20"></div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto py-16"> <!-- Global vertical padding for the main content area -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Left Column: Main Content (3/4 width on large screens) -->
+            <div class="lg:col-span-3 space-y-16 px-8">
+                <!-- Hero/About Section -->
+                <section id="about" class="text-center fade-in-section">
+                    <h1 class="text-5xl font-extrabold text-gray-900 mb-6 whitespace-nowrap" contenteditable="false">欢迎来到敬鲟的数字空间</h1>
+                    <p class="text-xl text-gray-medium max-w-4xl mx-auto mb-10" contenteditable="false">
+                        在这里，数字与创意交织，算法与美学共舞。我探索科技的边界，用代码和光影构筑作品，呈现一个融合技术洞察与艺术表达的数字世界。
+                    </p>
+                    <div class="flex justify-center space-x-6">
+                        <a href="#portfolio" class="btn-primary transform hover:scale-105" contenteditable="false">
+                            查看作品集
+                        </a>
+                        <a href="#contact" class="btn-secondary transform hover:scale-105" contenteditable="false">
+                            联系我
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Knowledge & Documents Section (now Knowledge Base) - MOVED UP -->
+                <section id="knowledge" class="fade-in-section">
+                    <h2 class="text-4xl text-center text-gray-900 mb-16" contenteditable="false">我的知识文库</h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        <!-- Added loading="lazy" and width/height to all knowledge article images -->
+                        <div class="card-bg rounded-xl overflow-hidden group cursor-pointer knowledge-card" data-article-id="tech-evolution">
+                            <div class="image-wrapper h-48">
+                                <img src="https://images.unsplash.com/photo-1678129035248-2615c0e14a84?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=300&fit=crop" alt="抽象结构建筑" class="w-full h-full object-cover editable-image" loading="lazy" width="600" height="300">
+                                <div class="image-edit-overlay hidden"><button onclick="editImage(this)">修改图片</button></div>
+                                <span class="paywall-lock-icon">🔒 已锁定</span>
+                            </div>
+                            <div class="p-8">
+                                <h3 class="text-2xl font-semibold mb-3 knowledge-card-title" contenteditable="false">技术随笔：前端框架的演进</h3>
+                                <p class="text-gray-medium text-base knowledge-card-description" contenteditable="false">探讨从jQuery到现代框架的发展历程及其实践经验。</p>
+                            </div>
+                        </div>
+
+                        <div class="card-bg rounded-xl overflow-hidden group cursor-pointer knowledge-card" data-article-id="responsive-design">
+                            <div class="image-wrapper h-48">
+                                <img src="https://images.unsplash.com/photo-1682337777174-897b2d586119?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=300&fit=crop" alt="现代建筑立面" class="w-full h-full object-cover editable-image" loading="lazy" width="600" height="300">
+                                <div class="image-edit-overlay hidden"><button onclick="editImage(this)">修改图片</button></div>
+                                <span class="paywall-lock-icon">🔒 已锁定</span>
+                            </div>
+                            <div class="p-8">
+                                <h3 class="text-2xl font-semibold mb-3 knowledge-card-title" contenteditable="false">设计思考：响应式布局的挑战</h3>
+                                <p class="text-gray-medium text-base knowledge-card-description" contenteditable="false">总结响应式设计的挑战与解决方案。</p>
+                            </div>
+                        </div>
+
+                        <div class="card-bg rounded-xl overflow-hidden group cursor-pointer knowledge-card" data-article-id="ai-webdev">
+                            <div class="image-wrapper h-48">
+                                <img src="https://images.unsplash.com/photo-1698305786524-ac6787627440?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=300&fit=crop" alt="未来主义建筑" class="w-full h-full object-cover editable-image" loading="lazy" width="600" height="300">
+                                <div class="image-edit-overlay hidden"><button onclick="editImage(this)">修改图片</button></div>
+                                <span class="paywall-lock-icon">🔒 已锁定</span>
+                            </div>
+                            <div class="p-8">
+                                <h3 class="text-2xl font-semibold mb-3 knowledge-card-title" contenteditable="false">AI在Web开发中的应用</h3>
+                                <p class="text-gray-medium text-base knowledge-card-description" contenteditable="false">探讨人工智能如何赋能前端与后端开发。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-12">
+                        <a href="#" class="btn-primary transform hover:scale-105" contenteditable="false">
+                            查看所有知识
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Portfolio Section -->
+                <section id="portfolio" class="fade-in-section">
+                    <h2 class="text-4xl text-center text-gray-900 mb-16" contenteditable="false">我的摄影作品</h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        <!-- Added loading="lazy" and width/height to all portfolio images -->
+                        <div class="card-bg rounded-xl overflow-hidden group">
+                            <div class="image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1519642878235-ef726a761e38?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=450&fit=crop" alt="概念建筑设计" class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 editable-image" loading="lazy" width="600" height="450">
+                                <div class="image-edit-overlay hidden">
+                                    <button onclick="editImage(this)">修改图片</button>
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <h3 class="text-2xl font-semibold mb-3" contenteditable="false">概念建筑设计</h3>
+                                <p class="text-gray-medium text-base" contenteditable="false">探索突破传统的前沿建筑艺术，融合未来主义与可持续设计。</p>
+                            </div>
+                        </div>
+                        <div class="card-bg rounded-xl overflow-hidden group">
+                            <div class="image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1522066922572-132d3780e243?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=450&fit=crop" alt="结构主义建筑" class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 editable-image" loading="lazy" width="600" height="450">
+                                <div class="image-edit-overlay hidden">
+                                    <button onclick="editImage(this)">修改图片</button>
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <h3 class="text-2xl font-semibold mb-3" contenteditable="false">结构主义建筑</h3>
+                                <p class="text-gray-medium text-base" contenteditable="false">解构与重组，以独特的几何形态展现建筑的内在力量。</p>
+                            </div>
+                        </div>
+                        <div class="card-bg rounded-xl overflow-hidden group">
+                            <div class="image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1596766548777-67448b17b62e?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=450&fit=crop" alt="未来城市景观" class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 editable-image" loading="lazy" width="600" height="450">
+                                <div class="image-edit-overlay hidden">
+                                    <button onclick="editImage(this)">修改图片</button>
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <h3 class="text-2xl font-semibold mb-3" contenteditable="false">未来城市景观</h3>
+                                <p class="text-gray-medium text-base" contenteditable="false">捕捉超现代都市的脉搏，展望人类居住空间的演变。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Section -->
+                <section id="contact" class="text-center fade-in-section">
+                    <h2 class="text-4xl text-gray-900 mb-16" contenteditable="false">联系我</h2>
+                    <p class="text-xl text-gray-medium max-w-3xl mx-auto mb-10" contenteditable="false">
+                        对我的作品感兴趣？有项目合作意向？或者只是想打个招呼？欢迎随时通过以下方式与我联系！
+                    </p>
+                    <div class="card-bg rounded-xl p-10 max-w-lg mx-auto contact-ink-style">
+                        <div class="contact-grid-container text-lg"> <!-- Changed to grid container class -->
+                            <div class="contact-grid-item">
+                                <span class="contact-icon" contenteditable="false">✉</span>
+                                <p class="ml-3"> <!-- Added margin-left for spacing -->
+                                    <strong class="text-link-color" contenteditable="false">邮箱:</strong> <a href="mailto:your.email@example.com" class="text-link-color hover:underline" contenteditable="false">your.email@example.com</a>
+                                </p>
+                            </div>
+                            <div class="contact-grid-item">
+                                <span class="contact-icon" contenteditable="false">☎</span>
+                                <p class="ml-3">
+                                    <strong class="text-link-color" contenteditable="false">微信/手机:</strong> <span class="text-gray-medium" contenteditable="false">138-XXXX-XXXX</span>
+                                </p>
+                            </div>
+                            <div class="contact-grid-item">
+                                <span class="contact-icon" contenteditable="false">&#x1F4BB;</span>
+                                <p class="ml-3">
+                                    <strong class="text-link-color" contenteditable="false">GitHub:</strong> <a href="https://github.com/yourusername" target="_blank" class="text-link-color hover:underline" contenteditable="false">github.com/yourusername</a>
+                                </p>
+                            </div>
+                            <div class="contact-grid-item">
+                                <span class="contact-icon" contenteditable="false">&#x1F517;</span>
+                                <p class="ml-3">
+                                    <strong class="text-link-color" contenteditable="false">领英:</strong> <a href="https://linkedin.com/in/yourprofile" target="_blank" class="text-link-color hover:underline" contenteditable="false">linkedin.com/in/yourprofile</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Resume Sidebar (1/4 width on large screens) -->
+            <div class="lg:col-span-1 px-8">
+                <section id="resume" class="card-bg rounded-xl p-8 fade-in-section lg:sticky lg:top-24">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6" contenteditable="false">详细个人简历</h3>
+                    <div class="image-wrapper mb-6 w-full h-48"> <!-- Changed to fixed height h-48 -->
+                        <img src="https://images.unsplash.com/photo-1520300684120-1a739116e033?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=225&fit=crop" alt="个人照片" class="w-full h-full object-cover editable-image" loading="lazy" width="400" height="225">
+                        <div class="image-edit-overlay hidden">
+                            <button onclick="editImage(this)">修改图片</button>
+                        </div>
+                    </div>
+                    <div class="text-left text-gray-medium space-y-4">
+                        <p contenteditable="false"><strong>姓名：</strong>敬鲟</p>
+                        <p contenteditable="false"><strong>职位：</strong>高级全栈工程师</p> <!-- Added new field -->
+                        <p contenteditable="false"><strong>邮箱：</strong>your.email@example.com</p>
+                        <p contenteditable="false"><strong>手机：</strong>138-XXXX-XXXX</p>
+                        <hr class="my-4 border-gray-200">
+                        <p class="font-semibold text-gray-normal mb-2" contenteditable="false">个人简介：</p>
+                        <p class="text-sm leading-relaxed" contenteditable="false">
+                            我是一名充满激情的全栈开发者和交互设计师，拥有5年行业经验。
+                            我擅长将复杂的技术概念转化为用户友好、视觉吸引力的产品。
+                            我热衷于学习最新技术，并将其应用于解决实际问题，致力于打造高性能、高可用、可扩展的Web应用。
+                            在职业生涯中，我主导和参与了多个大型项目的开发，积累了丰富的项目管理和团队协作经验。
+                        </p>
+                        <hr class="my-4 border-gray-200">
+                        <p class="font-semibold text-gray-normal mb-2" contenteditable="false">核心技能：</p>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li contenteditable="false">前端：React, Vue, JavaScript, TypeScript, Tailwind CSS</li>
+                            <li contenteditable="false">后端：Node.js, Python (Django/Flask), Go</li>
+                            <li contenteditable="false">数据库：PostgreSQL, MongoDB, Redis</li>
+                            <li contenteditable="false">云平台：AWS, Azure, Docker, Kubernetes</li>
+                            <li contenteditable="false">设计工具：Figma, Sketch, Adobe XD</li>
+                        </ul>
+                        <hr class="my-4 border-gray-200">
+                        <p class="font-semibold text-gray-normal mb-2" contenteditable="false">教育背景：</p>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li contenteditable="false">XXXX大学 - 计算机科学硕士 (2020)</li>
+                            <li contenteditable="false">XXXX学院 - 软件工程学士 (2018)</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="header-bg py-8 text-center text-gray-medium text-sm mt-12">
+        <p contenteditable="false">&copy; 2026 敬鲟. All rights reserved. 灵感来自科技与艺术的融合。</p>
+    </footer>
+
+    <!-- Hidden Detail Content for Knowledge Articles -->
+    <div id="article-details-container" class="hidden">
+        <div id="article-detail-tech-evolution" class="article-detail-content">
+            <h3 contenteditable="false">技术随笔：前端框架的演进</h3>
+            <p contenteditable="false">
+                前端技术日新月异，从早期的jQuery到如今的React、Vue和Angular，再到轻量级的Svelte，每个框架都承载着不同的设计理念和解决痛点。
+                jQuery以其简洁的DOM操作和跨浏览器兼容性，在Web开发的初期占据主导地位。它大大降低了JavaScript的门槛，让开发者能更高效地构建交互式网页。
+                随着SPA（单页应用）的兴起，React和Vue凭借其组件化、虚拟DOM和数据驱动的特性，极大地提升了开发效率和应用性能。它们鼓励开发者将复杂的UI拆解成独立的、可复用的组件，使得项目结构清晰，易于维护。
+                近年来，Svelte作为“无框架框架”脱颖而出，它在编译时将组件代码转换为纯JavaScript，无需运行时引入庞大的框架库，从而实现极致的性能和更小的包体积。
+                在选择前端框架时，我们需要综合考虑项目规模、团队经验、性能要求以及社区生态等因素。没有最好的框架，只有最适合项目的框架。
+            </p>
+            <p contenteditable="false">
+                <em>本文最后更新于 2024年7月26日。</em>
+            </p>
+        </div>
+        <div id="article-detail-responsive-design" class="article-detail-content">
+            <h3 contenteditable="false">设计思考：响应式布局的挑战</h3>
+            <p contenteditable="false">
+                响应式网页设计旨在让网站在不同设备（桌面、平板、手机）上都能提供一致且优化的用户体验。然而，实现完美的响应式布局并非易事。
+                最大的挑战之一是“内容优先”原则。在小屏幕上，有限的视口空间要求我们对内容进行优先级排序，确保最重要的信息首先呈现。这往往需要重新思考信息的层级和布局。
+                另一个挑战是性能。为大屏幕准备的高清图片和复杂脚本在移动设备上可能会导致加载缓慢，影响用户体验。因此，需要采用图片优化、懒加载、代码分割等技术。
+                交互设计也面临考验。鼠标悬停效果在触摸屏上无法实现，需要设计替代的触摸友好交互方式。导航菜单通常也需要从传统的横向菜单转变为抽屉式或折叠式菜单。
+                CSS Grid和Flexbox的普及，以及Rem、Em等相对单位的广泛应用，为响应式设计提供了强大的工具。结合媒体查询（Media Queries），我们可以精确控制元素在不同断点下的行为。
+                最终，响应式设计不仅仅是技术实现，更是一种设计思维，要求设计师和开发者共同协作，从一开始就考虑多设备的用户场景。
+            </p>
+            <p contenteditable="false">
+                <em>本文最后更新于 2024年6月18日。</em>
+            </p>
+        </div>
+        <div id="article-detail-ai-webdev" class="article-detail-content">
+            <h3 contenteditable="false">AI在Web开发中的应用</h3>
+            <p contenteditable="false">
+                人工智能（AI）正以前所未有的速度渗透到各个行业，Web开发也不例外。从智能代码生成到个性化用户体验，AI正在重塑我们的开发方式和产品形态。
+                在前端开发中，AI可以通过自动化UI/UX设计、智能图像处理（如自动生成alt文本、图像优化）和内容推荐系统，提升开发效率和用户参与度。例如，AI驱动的设计工具可以根据简单的描述生成原型，甚至直接生成前端代码。
+                在后端，AI在数据分析、用户行为预测、安全防护和智能客服方面展现出巨大潜力。机器学习模型可以分析海量用户数据，提供精准的个性化推荐；AI驱动的异常检测系统能有效识别并阻止恶意攻击。
+                未来的Web开发将更加强调人机协作。开发者将利用AI工具来处理重复性任务，从而将更多精力投入到创造性的问题解决和创新设计上。例如，通过自然语言处理（NLP）技术，我们可以用简单的文本指令来控制复杂的Web应用功能。
+                然而，AI在Web开发中的应用也伴随着挑战，如数据隐私、算法偏见和技术伦理。我们需要在拥抱AI带来的便利的同时，警惕并解决这些潜在问题，确保AI技术的健康发展。
+            </p>
+            <p contenteditable="false">
+                <em>本文最后更新于 2024年8月1日。</em>
+            </p>
+        </div>
+    </div>
+
+    <!-- Knowledge Article Modal -->
+    <div id="knowledge-modal" class="fixed inset-0 bg-black bg-opacity-90 z-[9999] flex justify-center items-center p-8 hidden">
+        <div class="card-bg rounded-lg p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto relative border border-[#e0e0e0] shadow-2xl">
+            <button id="modal-close-btn" class="absolute top-4 right-4 text-gray-medium hover:text-gray-normal text-3xl leading-none">&times;</button>
+            <h2 id="modal-title" class="text-4xl text-gray-900 mb-6"></h2>
+            <div id="modal-content" class="text-gray-normal text-lg leading-relaxed space-y-4">
+                <!-- Article content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Paywall Modal -->
+    <div id="paywall-modal" class="fixed inset-0 bg-black bg-opacity-90 z-[99999] flex justify-center items-center p-8 hidden">
+        <div class="card-bg rounded-lg p-8 max-w-md w-full relative border border-[#e0e0e0] shadow-2xl text-center">
+            <button id="paywall-close-btn" class="absolute top-4 right-4 text-gray-medium hover:text-gray-normal text-3xl leading-none">&times;</button>
+            <h3 class="text-3xl text-gray-900 mb-4">解锁知识文库内容</h3>
+            <p class="text-gray-medium mb-6">此内容仅对付费用户开放。请输入解锁码查看。</p>
+            <input type="password" id="unlock-code-input" placeholder="请输入解锁码" class="w-full p-3 rounded-md bg-gray-100 border border-gray-300 text-gray-800 mb-4 focus:outline-none focus:border-[#999999]">
+            <button id="unlock-btn" class="btn-primary w-full py-3">解锁</button>
+            <p id="unlock-message" class="text-red-600 mt-4 hidden">解锁码错误，请重试。</p>
+            <!-- REMOVED: <p class="text-gray-500 text-sm mt-4">提示：演示解锁码是 <strong class="text-gray-800">"unlock123"</strong></p> -->
+        </div>
+    </div>
+
+    <!-- Edit Mode Controls - Fixed to bottom right -->
+    <button id="edit-mode-toggle" class="fixed bottom-4 right-4 z-[99999] bg-gray-200 text-gray-600 text-xs px-3 py-1 rounded opacity-60 hover:opacity-100 transition-opacity duration-300">切换编辑模式</button>
+    <div id="edit-mode-controls" class="fixed bottom-4 right-28 z-[99999] space-x-2 hidden">
+        <button id="save-changes" class="btn-primary py-1 px-3 text-xs">保存</button>
+        <button id="cancel-changes" class="btn-secondary py-1 px-3 text-xs">取消</button>
+    </div>
+
+    <script>
+        // Store original HTML to revert changes
+        let originalPageContent = '';
+        let isKnowledgeUnlocked = false; // Tracks if the knowledge base is unlocked
+        const UNLOCK_CODE = "unlock123"; // The "password" to unlock content
+        const KNOWLEDGE_UNLOCKED_KEY = "knowledgeBaseUnlocked"; // localStorage key
+
+        // Carousel Logic
+        let slideIndex = 0;
+        let slides = []; // Initialize as empty, will be populated in initPageFeatures
+        let autoSlideInterval;
+
+        function showSlides() {
+            slides.forEach(s => s.classList.remove('active'));
+            if (slides.length > 0) {
+                slides[slideIndex].classList.add('active');
+                // Update slide number
+                const slideNumberElement = document.getElementById('slide-number');
+                if (slideNumberElement) {
+                    slideNumberElement.textContent = `${slideIndex + 1} / ${slides.length}`;
+                }
+            }
+        }
+
+        function plusSlides(n) {
+            stopAutoSlide();
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            showSlides();
+            startAutoSlide();
+        }
+
+        function startAutoSlide() {
+            stopAutoSlide();
+            if (slides.length > 1) { // Only auto-slide if there's more than one image
+                autoSlideInterval = setInterval(() => {
+                    plusSlides(1);
+                }, 6000);
+            }
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        // Fade-in-on-scroll Logic
+        function setupFadeInSections() {
+            const fadeElements = document.querySelectorAll('.fade-in-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+
+        // --- Edit Mode Logic ---
+        let isEditMode = false;
+        const editModeToggle = document.getElementById('edit-mode-toggle');
+        const editModeControls = document.getElementById('edit-mode-controls');
+        const saveChangesBtn = document.getElementById('save-changes');
+        const cancelChangesBtn = document.getElementById('cancel-changes');
+        const knowledgeModal = document.getElementById('knowledge-modal');
+        const paywallModal = document.getElementById('paywall-modal');
+        const unlockCodeInput = document.getElementById('unlock-code-input');
+        const unlockBtn = document.getElementById('unlock-btn');
+        const unlockMessage = document.getElementById('unlock-message');
+
+        // Elements that should always remain non-editable
+        const alwaysNonEditableSelectors = [
+            'nav a', // Navigation links
+            'button:not(#edit-mode-toggle):not(#save-changes):not(#cancel-changes):not(#modal-close-btn):not(#paywall-close-btn):not(#unlock-btn)', // All buttons except edit controls and modal close
+            'a.btn-primary', 'a.btn-secondary', // Links styled as buttons
+            '#unlock-code-input', // Unlock code input field
+            '#slide-number', // Carousel slide number
+            '.contact-icon' // Contact icons
+        ];
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+
+            // Select all elements that can be edited in view mode
+            const editableElements = document.querySelectorAll('[contenteditable]');
+            // Image overlays for all images that can be edited
+            const imageEditOverlays = document.querySelectorAll('.image-edit-overlay');
+            // Hidden article details for knowledge articles
+            const articleDetailContents = document.querySelectorAll('.article-detail-content');
+            // Knowledge cards for lock icon visibility
+            const knowledgeCards = document.querySelectorAll('.knowledge-card');
+
+
+            if (isEditMode) {
+                originalPageContent = document.documentElement.outerHTML; // Save current state
+                editModeToggle.textContent = '退出编辑模式';
+                editModeControls.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden'); // Prevent scrolling behind modal if it's open, or just to signify edit mode
+
+                // Make all initially non-editable elements editable
+                editableElements.forEach(el => el.setAttribute('contenteditable', 'true'));
+                // Make hidden article details editable
+                articleDetailContents.forEach(contentDiv => {
+                    contentDiv.querySelectorAll('[contenteditable]').forEach(el => el.setAttribute('contenteditable', 'true'));
+                });
+
+                imageEditOverlays.forEach(overlay => overlay.classList.remove('hidden'));
+                knowledgeCards.forEach(card => card.classList.remove('locked')); // Hide lock icon in edit mode
+                
+                // Pause carousel in edit mode
+                stopAutoSlide();
+            } else {
+                editModeToggle.textContent = '切换编辑模式';
+                editModeControls.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+
+                editableElements.forEach(el => el.setAttribute('contenteditable', 'false'));
+                articleDetailContents.forEach(contentDiv => {
+                    contentDiv.querySelectorAll('[contenteditable]').forEach(el => el.setAttribute('contenteditable', 'false'));
+                });
+
+                imageEditOverlays.forEach(overlay => overlay.classList.add('hidden'));
+                updateKnowledgeCardLockState(); // Reapply lock state
+                
+                // Resume carousel in view mode
+                startAutoSlide();
+            }
+
+            // Ensure specific elements always remain non-editable regardless of the general contenteditable state
+            alwaysNonEditableSelectors.forEach(selector => {
+                document.querySelectorAll(selector).forEach(el => el.setAttribute('contenteditable', 'false'));
+            });
+        }
+
+        function editImage(button) {
+            const imgElement = button.closest('.image-wrapper').querySelector('img');
+            const currentSrc = imgElement.src.startsWith('http') ? imgElement.src : ''; // Don't show placeholder API link
+            const newSrc = prompt("请输入新的图片URL地址:", currentSrc);
+            if (newSrc && newSrc.trim() !== '') {
+                imgElement.src = newSrc.trim();
+            }
+        }
+
+        function savePageChanges() {
+            // Temporarily disable contenteditable and hide overlays before saving
+            const editableElements = document.querySelectorAll('[contenteditable="true"]');
+            editableElements.forEach(el => el.setAttribute('contenteditable', 'false'));
+            const imageEditOverlays = document.querySelectorAll('.image-edit-overlay');
+            imageEditOverlays.forEach(overlay => overlay.classList.add('hidden'));
+
+            const htmlContent = document.documentElement.outerHTML; // Get the full HTML including DOCTYPE
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'index.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+
+            // Revert contenteditable and overlays for continued editing
+            if (isEditMode) {
+                 editableElements.forEach(el => el.setAttribute('contenteditable', 'true'));
+                 imageEditOverlays.forEach(overlay => overlay.classList.remove('hidden'));
+            }
+            // Re-apply always non-editable state
+            alwaysNonEditableSelectors.forEach(selector => {
+                document.querySelectorAll(selector).forEach(el => el.setAttribute('contenteditable', 'false'));
+            });
+            alert('页面修改已保存并下载为 index.html 文件！');
+        }
+
+        function cancelPageChanges() {
+            if (confirm("确定要取消所有未保存的修改吗？这将恢复到进入编辑模式前的状态。")) {
+                // Warning: document.write() rewrites the entire document, which can be slow and is generally discouraged
+                // for dynamic updates in modern web development. It's used here for simplicity to revert the full DOM state.
+                // In a production environment, a more sophisticated state management or partial DOM update
+                // strategy would be preferred for performance.
+                document.open();
+                document.write(originalPageContent);
+                document.close();
+                // Re-initialize all JS-driven features after DOM manipulation
+                initPageFeatures();
+                isEditMode = false; // Reset edit mode state
+                editModeToggle.textContent = '切换编辑模式';
+                editModeControls.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+                alert('修改已取消。页面已恢复到进入编辑模式前的状态。');
+            }
+        }
+        
+        // Helper function to setup/re-setup knowledge modal event listeners
+        function setupKnowledgeModalEvents() {
+            // Remove previous listeners to prevent duplicates after initPageFeatures
+            document.querySelectorAll('.knowledge-card').forEach(card => {
+                card.removeEventListener('click', handleKnowledgeCardClick); 
+                card.addEventListener('click', handleKnowledgeCardClick);
+            });
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            if (modalCloseBtn) {
+                modalCloseBtn.removeEventListener('click', closeKnowledgeModal);
+                modalCloseBtn.addEventListener('click', closeKnowledgeModal);
+            }
+            if (knowledgeModal) {
+                 knowledgeModal.removeEventListener('click', closeKnowledgeModalOutside);
+                 knowledgeModal.addEventListener('click', closeKnowledgeModalOutside);
+            }
+
+            // Paywall modal events
+            const paywallCloseBtn = document.getElementById('paywall-close-btn');
+            if (paywallCloseBtn) {
+                paywallCloseBtn.removeEventListener('click', closePaywallModal);
+                paywallCloseBtn.addEventListener('click', closePaywallModal);
+            }
+            if (paywallModal) {
+                paywallModal.removeEventListener('click', closePaywallModalOutside);
+                paywallModal.addEventListener('click', closePaywallModalOutside);
+            }
+            if (unlockBtn) {
+                unlockBtn.removeEventListener('click', attemptUnlock);
+                unlockBtn.addEventListener('click', attemptUnlock);
+            }
+            if (unlockCodeInput) {
+                unlockCodeInput.removeEventListener('keypress', handleUnlockKeyPress);
+                unlockCodeInput.addEventListener('keypress', handleUnlockKeyPress);
+            }
+        }
+
+        // Helper function to re-initialize all necessary JS features after DOM changes (e.g., cancel)
+        function initPageFeatures() {
+            // Check for unlocked state on page load
+            isKnowledgeUnlocked = localStorage.getItem(KNOWLEDGE_UNLOCKED_KEY) === 'true';
+            updateKnowledgeCardLockState();
+
+            // Re-query elements as DOM might have changed for carousel
+            slides = document.querySelectorAll(".carousel-container .carousel-slide");
+            
+            // Carousel
+            if (slides.length > 0) {
+                slideIndex = 0;
+                showSlides();
+                startAutoSlide();
+                const carouselSection = document.getElementById('carousel-section');
+                // Ensure event listeners are not duplicated
+                carouselSection.removeEventListener('mouseenter', stopAutoSlide);
+                carouselSection.removeEventListener('mouseleave', startAutoSlide);
+                carouselSection.addEventListener('mouseenter', stopAutoSlide);
+                carouselSection.addEventListener('mouseleave', startAutoSlide);
+            }
+            // Fade-in sections
+            setupFadeInSections();
+
+            // Knowledge Modal Handlers and Paywall Handlers
+            setupKnowledgeModalEvents(); // Call the dedicated setup function
+        }
+
+        // --- Knowledge Base Modal Logic ---
+        let currentArticleId = null; // Store the ID of the article being attempted to open
+
+        function handleKnowledgeCardClick(event) {
+            // Only open modal if not in edit mode
+            if (isEditMode) {
+                // If in edit mode, allow direct editing of card text/image by not opening the modal
+                return;
+            }
+            
+            const card = event.currentTarget;
+            currentArticleId = card.dataset.articleId; // Store the article ID
+
+            if (isKnowledgeUnlocked) {
+                openKnowledgeModal(currentArticleId);
+            } else {
+                openPaywallModal();
+            }
+        }
+
+        function openKnowledgeModal(articleId) {
+            const detailContentDiv = document.getElementById(`article-detail-${articleId}`);
+
+            if (detailContentDiv) {
+                const modalTitleElement = document.getElementById('modal-title');
+                const modalContentElement = document.getElementById('modal-content');
+
+                // Clone content to prevent direct editing in the modal affecting the hidden source
+                const clonedContent = detailContentDiv.cloneNode(true); // true for deep clone
+
+                modalTitleElement.textContent = clonedContent.querySelector('h3').textContent; // Get title from cloned H3
+                modalContentElement.innerHTML = ''; // Clear previous content
+                // Append all child nodes of the cloned content except the H3
+                Array.from(clonedContent.children).forEach(child => {
+                    if (child.tagName.toLowerCase() !== 'h3') {
+                        modalContentElement.appendChild(child);
+                    }
+                });
+
+                knowledgeModal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden'); // Prevent body scroll when modal is open
+            }
+        }
+
+        function closeKnowledgeModal() {
+            knowledgeModal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            currentArticleId = null; // Clear current article ID
+        }
+
+        function closeKnowledgeModalOutside(event) {
+            if (event.target === knowledgeModal) {
+                closeKnowledgeModal();
+            }
+        }
+
+        // --- Paywall Logic ---
+        function openPaywallModal() {
+            paywallModal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            unlockCodeInput.value = ''; // Clear previous input
+            unlockMessage.classList.add('hidden'); // Hide any previous error message
+            unlockCodeInput.focus(); // Focus input for immediate typing
+        }
+
+        function closePaywallModal() {
+            paywallModal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function closePaywallModalOutside(event) {
+            if (event.target === paywallModal) {
+                closePaywallModal();
+            }
+        }
+
+        function attemptUnlock() {
+            const enteredCode = unlockCodeInput.value.trim();
+            if (enteredCode === UNLOCK_CODE) {
+                isKnowledgeUnlocked = true;
+                localStorage.setItem(KNOWLEDGE_UNLOCKED_KEY, 'true');
+                closePaywallModal();
+                updateKnowledgeCardLockState(); // Update UI to show unlocked state
+                if (currentArticleId) { // If an article was clicked before paywall, open it now
+                    openKnowledgeModal(currentArticleId);
+                }
+            } else {
+                unlockMessage.classList.remove('hidden');
+            }
+        }
+
+        function handleUnlockKeyPress(event) {
+            if (event.key === 'Enter') {
+                attemptUnlock();
+            }
+        }
+
+        function updateKnowledgeCardLockState() {
+            const knowledgeCards = document.querySelectorAll('.knowledge-card');
+            knowledgeCards.forEach(card => {
+                if (isKnowledgeUnlocked) {
+                    card.classList.remove('locked');
+                } else {
+                    card.classList.add('locked');
+                }
+            });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            initPageFeatures(); // Initial setup of all JS features
+
+            editModeToggle.addEventListener('click', toggleEditMode);
+            saveChangesBtn.addEventListener('click', saveChanges);
+            cancelChangesBtn.addEventListener('click', cancelPageChanges);
+            
+            // Make editImage function globally accessible
+            window.editImage = editImage;
+            window.plusSlides = plusSlides; // Make carousel functions globally accessible for inline onclick
+        });
+    </script>
+</body>
+</html>
